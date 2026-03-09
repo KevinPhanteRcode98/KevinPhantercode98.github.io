@@ -1,5 +1,6 @@
 "use client";
 import { motion, easeOut } from "framer-motion";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -90,6 +91,19 @@ const fadeIn = {
 	},
 };
 
+const staggerContainer = {
+	hidden: {},
+	visible: {
+		transition: {
+			staggerChildren: 0.18,
+		},
+	},
+};
+const projectCardMotion = {
+	hidden: { opacity: 0, y: 40 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: easeOut } },
+};
+
 export default function Home() {
 	return (
 		<div className="min-h-screen bg-[#101010] text-gray-200">
@@ -171,8 +185,13 @@ export default function Home() {
 					<h3 className="text-2xl font-semibold text-cyan-400 mb-4">Tech Stack</h3>
 					<div className="flex flex-wrap gap-4 justify-center">
 						{techStack.map((tech) => (
-							<div key={tech.name} className="flex flex-col items-center bg-[#181f2a] rounded-lg px-3 py-2 shadow-md">
-								{tech.svg}
+							<div
+								key={tech.name}
+								className="flex flex-col items-center bg-[#181f2a] rounded-lg px-3 py-2 shadow-md transition-transform duration-200 group"
+							>
+								<div className="transition-transform duration-200 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_cyan]">
+									{tech.svg}
+								</div>
 								<span className="text-sm mt-1 text-cyan-300">{tech.name}</span>
 							</div>
 						))}
@@ -188,18 +207,30 @@ export default function Home() {
 					className="mb-10"
 				>
 					<h3 className="text-2xl font-semibold text-cyan-400 mb-4">Experiencia & Proyectos</h3>
-					<div className="space-y-6">
+					<motion.div
+						className="space-y-6"
+						variants={staggerContainer}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.2 }}
+					>
 						{/* Proyecto 1 */}
-						<div className="bg-[#181f2a] rounded-xl p-6 shadow-lg">
+						<motion.div
+							variants={projectCardMotion}
+							  className="bg-white/10 backdrop-blur-md border border-cyan-300/30 rounded-xl p-6 shadow-lg transition-all duration-300"
+						>
 							<h4 className="text-xl font-bold text-cyan-300 mb-2">Data Mart de Ventas - Tai Loy</h4>
 							<p className="mb-2">Implementación con SQL Server y Power BI para análisis de ventas.</p>
 							<div className="flex gap-2">
 								{techStack.find(t => t.name === "SQL Server")?.svg}
 								{techStack.find(t => t.name === "Power BI")?.svg}
 							</div>
-						</div>
+						</motion.div>
 						{/* Proyecto 2 */}
-						<div className="bg-[#181f2a] rounded-xl p-6 shadow-lg">
+						<motion.div
+							variants={projectCardMotion}
+							className="bg-[#181f2a] rounded-xl p-6 shadow-lg"
+						>
 							<h4 className="text-xl font-bold text-cyan-300 mb-2">Sistema Web de Citas - Clínica Izaguirre</h4>
 							<p className="mb-2">Desarrollo web integral para gestión de citas médicas.</p>
 							<div className="flex gap-2">
@@ -208,9 +239,12 @@ export default function Home() {
 								{/* React SVG */}
 								<svg width="40" height="40" viewBox="0 0 40 40"><rect width="40" height="40" rx="18" fill="#61DAFB"/><text x="50%" y="55%" textAnchor="middle" fill="#181717" fontSize="14" fontWeight="bold" fontFamily="Arial">React</text></svg>
 							</div>
-						</div>
+						</motion.div>
 						{/* Proyecto 3 */}
-						<div className="bg-[#181f2a] rounded-xl p-6 shadow-lg">
+						<motion.div
+							variants={projectCardMotion}
+							className="bg-[#181f2a] rounded-xl p-6 shadow-lg"
+						>
 							<h4 className="text-xl font-bold text-cyan-300 mb-2">Proyectos Backend</h4>
 							<p className="mb-2">Más de 10 aplicaciones en Python/SQLite y CRUD-MVC en Java.</p>
 							<div className="flex gap-2">
@@ -218,8 +252,8 @@ export default function Home() {
 								{techStack.find(t => t.name === "SQLite")?.svg}
 								{techStack.find(t => t.name === "Java")?.svg}
 							</div>
-						</div>
-					</div>
+						</motion.div>
+					</motion.div>
 				</motion.section>
 
 				{/* Formación */}
@@ -275,7 +309,15 @@ export default function Home() {
 						.
 					</p>
 				</motion.section>
-			</main>
-		</div>
-	);
+			{/* Badge flotante de contacto */}
+			<div className="fixed bottom-6 right-6 z-50">
+				<div className="bg-gradient-to-r from-blue-600 via-cyan-400 to-cyan-300 px-6 py-3 rounded-2xl shadow-lg backdrop-blur-md border border-cyan-300/40 text-white font-semibold flex items-center gap-3 animate-pulse">
+					<svg width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#0A66C2"/><text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="bold" fontFamily="Arial">in</text></svg>
+					<span>Disponible para vacantes AWS/Java</span>
+					<a href="mailto:kevinsilvap1998@hotmail.com" className="ml-2 underline text-cyan-100 hover:text-cyan-300 transition">Contáctame</a>
+				</div>
+			</div>
+		</main>
+	</div>
+);
 }
