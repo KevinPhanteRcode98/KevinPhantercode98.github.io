@@ -3,15 +3,14 @@ import Link from "next/link";
 
 const fadeIn = {
 	hidden: { opacity: 0, y: 40 },
-	visible: (i = 1) => ({
+	visible: {
 		opacity: 1,
 		y: 0,
 		transition: {
-			delay: i * 0.15,
 			duration: 0.7,
-			ease: "easeOut",
+			ease: [0.4, 0, 0.2, 1], // cubic-bezier para easeOut
 		},
-	}),
+	},
 };
 
 const projects = [
@@ -58,29 +57,33 @@ export default function Home() {
 				className="w-full max-w-2xl py-16 flex flex-col items-center"
 			>
 				<motion.h1
+					initial="hidden"
+					animate="visible"
 					variants={fadeIn}
-					custom={1}
 					className="text-4xl md:text-5xl font-bold text-[#ededed] mb-4 text-center"
 				>
 					Kevin Arny Silva Paredes
 				</motion.h1>
 				<motion.h2
+					initial="hidden"
+					animate="visible"
 					variants={fadeIn}
-					custom={2}
 					className="text-xl md:text-2xl font-semibold text-cyan-400 mb-2 text-center"
 				>
 					Ingeniero de Sistemas | Java & AWS Developer
 				</motion.h2>
 				<motion.p
+					initial="hidden"
+					animate="visible"
 					variants={fadeIn}
-					custom={3}
 					className="text-base md:text-lg text-gray-400 mb-6 text-center"
 				>
 					Estudiante de 10mo ciclo de Ingeniería de Sistemas e Informática. Apasionado por el desarrollo fullstack, la escalabilidad y soluciones cloud en AWS. Experiencia en backend Java/API REST, gestión de datos y visualización con SQL Server y Power BI.
 				</motion.p>
 				<motion.div
+					initial="hidden"
+					animate="visible"
 					variants={fadeIn}
-					custom={4}
 					className="flex gap-4 mt-2"
 				>
 					<Link href="https://linkedin.com/in/kevin-silva-paredes-936646343" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
@@ -103,26 +106,26 @@ export default function Home() {
 				className="w-full max-w-2xl mb-12"
 			>
 				<motion.h3
+					initial="hidden"
+					animate="visible"
 					variants={fadeIn}
-					custom={1}
 					className="text-2xl font-semibold text-cyan-400 mb-4"
 				>
 					Tech Stack
 				</motion.h3>
 				<motion.ul
+					initial="hidden"
+					animate="visible"
 					variants={fadeIn}
-					custom={2}
 					className="flex flex-wrap gap-2"
 				>
-					{skills.map((skill, i) => (
-						<motion.li
+					{skills.map((skill) => (
+						<li
 							key={skill}
-							variants={fadeIn}
-							custom={i + 1}
 							className="px-3 py-1 bg-gray-800 text-gray-200 rounded-lg text-sm shadow-sm border border-cyan-700"
 						>
 							{skill}
-						</motion.li>
+						</li>
 					))}
 				</motion.ul>
 			</motion.section>
@@ -136,18 +139,17 @@ export default function Home() {
 				className="w-full max-w-2xl mb-12"
 			>
 				<motion.h3
+					initial="hidden"
+					animate="visible"
 					variants={fadeIn}
-					custom={1}
 					className="text-2xl font-semibold text-cyan-400 mb-4"
 				>
 					Experiencia & Proyectos
 				</motion.h3>
 				<div className="grid gap-6">
-					{projects.map((project, i) => (
-						<motion.div
+					{projects.map((project) => (
+						<div
 							key={project.title}
-							variants={fadeIn}
-							custom={i + 1}
 							className="bg-gray-900 border border-gray-800 rounded-xl p-6 shadow-lg hover:shadow-cyan-700/30 transition-shadow group"
 						>
 							<h4 className="text-xl font-bold text-cyan-300 mb-2 group-hover:text-cyan-400 transition-colors">{project.title}</h4>
@@ -159,7 +161,7 @@ export default function Home() {
 									</span>
 								))}
 							</div>
-						</motion.div>
+						</div>
 					))}
 				</div>
 			</motion.section>
@@ -173,21 +175,18 @@ export default function Home() {
 				className="w-full max-w-2xl mb-16"
 			>
 				<motion.h3
+					initial="hidden"
+					animate="visible"
 					variants={fadeIn}
-					custom={1}
 					className="text-2xl font-semibold text-cyan-400 mb-4"
 				>
 					Logros Destacados
 				</motion.h3>
-				<motion.ul
-					variants={fadeIn}
-					custom={2}
-					className="list-disc list-inside text-gray-300"
-				>
-					<motion.li variants={fadeIn} custom={3} className="mb-2">Beca por Excelencia Académica UTP (2022 - 2024)</motion.li>
-					<motion.li variants={fadeIn} custom={4} className="mb-2">Certificación Scrum Fundamentals Certified (SFC™)</motion.li>
-					<motion.li variants={fadeIn} custom={5} className="mb-2">Ganador del concurso de Networking 2024</motion.li>
-				</motion.ul>
+				<ul className="list-disc list-inside text-gray-300">
+					<li className="mb-2">Beca por Excelencia Académica UTP (2022 - 2024)</li>
+					<li className="mb-2">Certificación Scrum Fundamentals Certified (SFC™)</li>
+					<li className="mb-2">Ganador del concurso de Networking 2024</li>
+				</ul>
 			</motion.section>
 		</main>
 	);
