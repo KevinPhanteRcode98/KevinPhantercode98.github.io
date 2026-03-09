@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+"use client";
+import { motion, easeOut } from "framer-motion";
 import Link from "next/link";
 
 const fadeIn = {
@@ -8,7 +9,7 @@ const fadeIn = {
 		y: 0,
 		transition: {
 			duration: 0.7,
-			ease: "easeOut",
+			ease: easeOut,
 		},
 	},
 };
