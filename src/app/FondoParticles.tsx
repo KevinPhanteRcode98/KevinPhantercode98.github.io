@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 
 export default function FondoParticles() {
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
