@@ -32,6 +32,7 @@ export default function FondoParticles() {
 
     // Animación
     function animate() {
+      if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
       // Fondo transparente: no fillRect
 
