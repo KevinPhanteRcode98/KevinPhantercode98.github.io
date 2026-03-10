@@ -17,7 +17,7 @@ export default function FondoParticles() {
     const PARTICLE_COUNT = 60;
     const PARTICLE_RADIUS = 3;
     const LINE_DISTANCE = 120;
-    const particles = [];
+    const particles: { x: number; y: number; vx: number; vy: number }[] = [];
     let mouse = { x: width / 2, y: height / 2 };
 
     // Crear partículas
