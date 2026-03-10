@@ -80,7 +80,7 @@ export default function FondoParticles() {
     animate();
 
     // Mouse
-    function handleMouse(e) {
+    function handleMouse(e: MouseEvent) {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
     }
