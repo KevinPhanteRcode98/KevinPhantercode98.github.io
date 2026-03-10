@@ -6,7 +6,7 @@ export default function FondoParticles() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !(canvas instanceof window.HTMLCanvasElement)) return;
     const ctx = canvas.getContext("2d");
     let width = window.innerWidth;
     let height = window.innerHeight;
